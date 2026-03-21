@@ -1,0 +1,63 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"   # triggers on v1.0.0, v1.2.3, etc.
+
+jobs:
+  build-and-release:
+    name: Build DMG and publish release
+    runs-on: macos-15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show Swift version
+        run: swift --version
+
+      - name: Set version from tag
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_ENV"
+
+      - name: Build universal binary
+        run: bash build.sh --universal
+
+      - name: Create DMG
+        run: bash scripts/create_dmg.sh "$VERSION"
+
+      - name: Compute SHA-256
+        run: |
+          SHA=$(shasum -a 256 "build/SpacesGrid-${VERSION}.dmg" | awk '{print $1}')
+          echo "DMG_SHA256=$SHA" >> "$GITHUB_ENV"
+          echo "SHA-256: $SHA"
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "SpacesGrid v${{ env.VERSION }}"
+          body: |
+            ## Install
+
+            ### Option 1 — Direct download (easiest)
+            1. Download **SpacesGrid-${{ env.VERSION }}.dmg** below.
+            2. Open the DMG, drag **SpacesGrid.app** to your **Applications** folder.
+            3. Right-click the app → **Open** to bypass the Gatekeeper warning on first launch
+               (the app is ad-hoc signed, not notarized with an Apple Developer ID).
+
+            ### Option 2 — Build from source
+            ```bash
+            git clone https://github.com/${{ github.repository }}.git
+            cd SpacesGrid
+            bash build.sh
+            open build/SpacesGrid.app
+            ```
+
+            ---
+
+            **SHA-256 (DMG):** `${{ env.DMG_SHA256 }}`
+
+            See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for what's new.
+          files: build/SpacesGrid-${{ env.VERSION }}.dmg
+          draft: false
+          prerelease: false

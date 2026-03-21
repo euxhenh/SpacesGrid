@@ -1,0 +1,44 @@
+# Build output
+build/
+
+# Generated icon files (reproduced by scripts/generate_icon.py)
+# Keep icon-1024.png and AppIcon.icns but not the full iconset
+assets/AppIcon.iconset/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Xcode (if anyone opens the project in Xcode)
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+DerivedData/
+*.hmap
+*.ipa
+
+# Swift Package Manager (if ever adopted)
+.build/
+.swiftpm/
+Packages/
+Package.resolved
+
+# Compiled Swift object files
+*.o
+*.d
+*.swp
+
+# Editor directories
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Environment / secrets
+.env
+*.pem
+
+# DMGs produced locally
+*.dmg
+.claude

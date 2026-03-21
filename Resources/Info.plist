@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- App icon -->
+    <key>CFBundleIconFile</key>
+    <string>AppIcon</string>
+
+    <!-- App identity -->
+    <key>CFBundleName</key>
+    <string>SpacesGrid</string>
+    <key>CFBundleDisplayName</key>
+    <string>SpacesGrid</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.local.SpacesGrid</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0</string>
+    <key>CFBundleExecutable</key>
+    <string>SpacesGrid</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>NSPrincipalClass</key>
+    <string>NSApplication</string>
+
+    <!-- Hide the Dock icon — this is a menu-bar-only app -->
+    <key>LSUIElement</key>
+    <true/>
+
+    <!-- Minimum macOS version (Ventura for full private-API compatibility) -->
+    <key>LSMinimumSystemVersion</key>
+    <string>13.0</string>
+
+    <!-- Needed on macOS 14+ to read window list without Screen Recording prompt.
+         Without this the app still works but may not see windows in other apps. -->
+    <key>NSWindowListUsageDescription</key>
+    <string>SpacesGrid reads the list of open windows to show which Spaces are occupied.</string>
+
+    <!-- High-resolution display support -->
+    <key>NSHighResolutionCapable</key>
+    <true/>
+</dict>
+</plist>
