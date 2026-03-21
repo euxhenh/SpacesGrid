@@ -9,6 +9,8 @@ jobs:
   build-and-release:
     name: Build DMG and publish release
     runs-on: macos-15
+    permissions:
+      contents: write   # required to create releases and upload assets
 
     steps:
       - name: Checkout
