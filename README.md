@@ -1,13 +1,9 @@
-<img src="assets/icon-1024.png" width="48" align="left" alt="SpacesGrid icon" style="margin-right: 12px">
-
-# SpacesGrid
+# <img src="assets/icon-1024.png" width="42" alt="SpacesGrid icon" valign="middle"> SpacesGrid
 
 A compact macOS menu-bar application that shows all of your Mission Control
 Spaces as a tiny, configurable grid. Spaces with open windows are highlighted;
 your currently active Space is shown in your accent color. KDE Plasma ships a
 similar Pager widget — SpacesGrid brings the same idea to macOS.
-
-<br clear="left">
 
 > **Disclaimer:** I'm not a Swift developer — this project was built entirely
 > with [Claude Code](https://claude.ai). I wanted to bring a useful
