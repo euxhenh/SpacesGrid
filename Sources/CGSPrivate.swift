@@ -37,3 +37,4 @@ func CGSCopySpacesForWindows(
     _ mask: UInt32,
     _ windowIDs: CFArray
 ) -> CFArray?
+

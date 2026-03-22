@@ -48,7 +48,7 @@ final class GridView: NSView {
             if space.isActive {
                 p.activeColor.setFill()
                 path.fill()
-            } else if space.hasWindows {
+            } else if p.showWindowIndicators && space.hasWindows {
                 p.occupiedColor.setFill()
                 path.fill()
             } else {

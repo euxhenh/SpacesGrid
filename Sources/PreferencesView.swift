@@ -33,7 +33,7 @@ private struct GridPreview: View {
                     switch idx {
                     case 0:   // active
                         ctx.fill(path, with: .color(Color(prefs.activeColor)))
-                    case 1:   // occupied
+                    case 1 where prefs.showWindowIndicators:   // occupied (only when feature is on)
                         ctx.fill(path, with: .color(Color(prefs.occupiedColor)))
                     default:  // empty
                         ctx.stroke(
@@ -161,6 +161,8 @@ private struct AppearanceTab: View {
                         color: Binding(get: { prefs.occupiedColor },
                                        set: { prefs.occupiedColor = $0 })
                     )
+                    .disabled(!prefs.showWindowIndicators)
+                    .opacity(prefs.showWindowIndicators ? 1 : 0.4)
                     Divider()
                     ColorRow(
                         label: "Empty space border",
@@ -282,6 +284,19 @@ private struct BehaviourTab: View {
 
             GroupBox("Display") {
                 VStack(alignment: .leading, spacing: 10) {
+                    Toggle(isOn: Binding(
+                        get: { prefs.showWindowIndicators },
+                        set: { prefs.showWindowIndicators = $0 }
+                    )) {
+                        VStack(alignment: .leading, spacing: 1) {
+                            Text("Highlight spaces with open windows")
+                            Text("Fills spaces that have at least one visible, non-minimized window")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+
+                    Divider()
                     Toggle(isOn: Binding(
                         get: { prefs.showFullscreenBadge },
                         set: { prefs.showFullscreenBadge = $0 }

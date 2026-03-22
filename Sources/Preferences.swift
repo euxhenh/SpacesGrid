@@ -72,6 +72,9 @@ final class Preferences: ObservableObject {
     @Published var refreshInterval: Double {
         didSet { ud.set(refreshInterval, forKey: Keys.refreshInterval); emit() }
     }
+    @Published var showWindowIndicators: Bool {
+        didSet { ud.set(showWindowIndicators, forKey: Keys.showWindowIndicators); emit() }
+    }
     @Published var showFullscreenBadge: Bool {
         didSet { ud.set(showFullscreenBadge, forKey: Keys.showFullscreenBadge); emit() }
     }
@@ -101,8 +104,9 @@ final class Preferences: ObservableObject {
         cellWidth         = ud.object(forKey: Keys.cellWidth)     as? Double ?? 9
         cellHeight        = ud.object(forKey: Keys.cellHeight)    as? Double ?? 6
         cellGap           = ud.object(forKey: Keys.cellGap)       as? Double ?? 1.5
-        refreshInterval   = ud.object(forKey: Keys.refreshInterval) as? Double ?? 2.0
-        showFullscreenBadge = ud.object(forKey: Keys.showFullscreenBadge) as? Bool ?? true
+        refreshInterval      = ud.object(forKey: Keys.refreshInterval)      as? Double ?? 2.0
+        showWindowIndicators = ud.object(forKey: Keys.showWindowIndicators) as? Bool  ?? true
+        showFullscreenBadge  = ud.object(forKey: Keys.showFullscreenBadge)  as? Bool  ?? true
     }
 
     // MARK: - Reset
@@ -118,8 +122,9 @@ final class Preferences: ObservableObject {
         cellWidth           = 9
         cellHeight          = 6
         cellGap             = 1.5
-        refreshInterval     = 2.0
-        showFullscreenBadge = true
+        refreshInterval      = 2.0
+        showWindowIndicators  = true
+        showFullscreenBadge  = true
     }
 
     // MARK: - Internal
@@ -140,6 +145,7 @@ final class Preferences: ObservableObject {
         static let cellHeight           = "cellHeight"
         static let cellGap              = "cellGap"
         static let refreshInterval      = "refreshInterval"
+        static let showWindowIndicators  = "showWindowIndicators"
         static let showFullscreenBadge  = "showFullscreenBadge"
     }
 }
